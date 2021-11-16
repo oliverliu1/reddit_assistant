@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import collections
 
 
 CLIENT_ID = os.environ.get('CLIENT_ID')
@@ -29,4 +30,18 @@ def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD):
     # add authorization to our headers dictionary
     headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 
-    return requests.get("https://oauth.reddit.com/r/askcarsales/hot", headers=headers).json()
+    return requests.get("https://oauth.reddit.com/r/askcarsales/hot", headers=headers)
+
+def parse_text(data):
+    text_votes = {}
+
+    for post in data.json()['data']['children']:
+        text_votes[post['data']['ups']] = post['data']['selftext']
+
+    od_text_votes = collections.OrderedDict(sorted(text_votes.items(), reverse=True))
+    return list(od_text_votes.items())[0]
+
+
+if __name__ == '__main__':
+    data = call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD)
+    print(parse_text(data))

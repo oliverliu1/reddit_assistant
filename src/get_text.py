@@ -1,14 +1,6 @@
 import requests
 import json
-import os
 import collections
-
-
-CLIENT_ID = os.environ.get('CLIENT_ID')
-SECRET_KEY = os.environ.get('SECRET_KEY')
-USERNAME = os.environ.get('REDDIT_USERNAME')
-PASSWORD = os.environ.get('REDDIT_PASSWORD')
-
 
 def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD):
     auth = requests.auth.HTTPBasicAuth(CLIENT_ID, SECRET_KEY)
@@ -40,8 +32,3 @@ def parse_text(data):
 
     od_text_votes = collections.OrderedDict(sorted(text_votes.items(), reverse=True))
     return list(od_text_votes.items())[0][1]
-
-
-if __name__ == '__main__':
-    data = call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD)
-    print(parse_text(data))

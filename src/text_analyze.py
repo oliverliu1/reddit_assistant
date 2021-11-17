@@ -25,6 +25,7 @@ def summarize(doc):
         freq_word[word] = (freq_word[word]/max_freq)
 
     sent_strength = {}
+    
     for sent in doc.sents:
         for word in sent:
             if word.text in freq_word.keys():

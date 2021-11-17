@@ -39,7 +39,7 @@ def parse_text(data):
         text_votes[post['data']['ups']] = post['data']['selftext']
 
     od_text_votes = collections.OrderedDict(sorted(text_votes.items(), reverse=True))
-    return list(od_text_votes.items())[0]
+    return list(od_text_votes.items())[0][1]
 
 
 if __name__ == '__main__':

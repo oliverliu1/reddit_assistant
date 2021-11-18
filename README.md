@@ -1,6 +1,6 @@
 # Reddit Assistant
 
-[Access Reddit Assistant here!](https://share.streamlit.io/oliverliu1/reddit_assistant/app.py)
+[Here's the Reddit Assistant!](https://share.streamlit.io/oliverliu1/reddit_assistant/app.py)
 
 Reddit Assistant pulls data from Reddit using Reddit API, and displays the top post from the past 24 hours summarized.
 
@@ -8,7 +8,6 @@ Reddit Assistant pulls data from Reddit using Reddit API, and displays the top p
 
 - Python
 - spaCy
-- Reddit API
 - streamlit
 
 ## Changelog

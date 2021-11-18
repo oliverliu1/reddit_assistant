@@ -10,7 +10,7 @@ USERNAME = os.environ.get('REDDIT_USERNAME')
 PASSWORD = os.environ.get('REDDIT_PASSWORD')
 
 
-def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD):
+def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD, subreddit='askcarsales'):
     auth = requests.auth.HTTPBasicAuth(CLIENT_ID, SECRET_KEY)
 
     data = {'grant_type': 'password',
@@ -30,7 +30,7 @@ def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD):
     # add authorization to our headers dictionary
     headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 
-    return requests.get("https://oauth.reddit.com/r/askcarsales/hot", headers=headers)
+    return requests.get(f"https://oauth.reddit.com/r/{subreddit}/hot", headers=headers)
 
 def parse_text(data):
     text_votes = {}
@@ -39,7 +39,7 @@ def parse_text(data):
         text_votes[post['data']['ups']] = post['data']['selftext']
 
     od_text_votes = collections.OrderedDict(sorted(text_votes.items(), reverse=True))
-    return list(od_text_votes.items())[0]
+    return list(od_text_votes.items())[0][1]
 
 
 if __name__ == '__main__':

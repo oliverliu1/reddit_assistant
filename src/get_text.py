@@ -4,12 +4,6 @@ import os
 import collections
 
 
-CLIENT_ID = os.environ.get('CLIENT_ID')
-SECRET_KEY = os.environ.get('SECRET_KEY')
-USERNAME = os.environ.get('REDDIT_USERNAME')
-PASSWORD = os.environ.get('REDDIT_PASSWORD')
-
-
 def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD, subreddit='askcarsales'):
     auth = requests.auth.HTTPBasicAuth(CLIENT_ID, SECRET_KEY)
 

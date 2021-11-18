@@ -9,6 +9,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 USERNAME = os.environ.get('REDDIT_USERNAME')
 PASSWORD = os.environ.get('REDDIT_PASSWORD')
 
+
 subreddits = [
               'cscareerquestions',
               'askcarsales',

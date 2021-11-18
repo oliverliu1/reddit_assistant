@@ -4,6 +4,7 @@ from string import punctuation
 from collections import Counter
 from heapq import nlargest
 
+
 def summarize(doc):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(doc)
@@ -25,6 +26,7 @@ def summarize(doc):
         freq_word[word] = (freq_word[word]/max_freq)
 
     sent_strength = {}
+
     
     for sent in doc.sents:
         for word in sent:

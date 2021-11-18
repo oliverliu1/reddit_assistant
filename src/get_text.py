@@ -2,7 +2,14 @@ import requests
 import json
 import collections
 
-def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD):
+
+CLIENT_ID = os.environ.get('CLIENT_ID')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+USERNAME = os.environ.get('REDDIT_USERNAME')
+PASSWORD = os.environ.get('REDDIT_PASSWORD')
+
+
+def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD, subreddit='askcarsales'):
     auth = requests.auth.HTTPBasicAuth(CLIENT_ID, SECRET_KEY)
 
     data = {'grant_type': 'password',
@@ -22,7 +29,7 @@ def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD):
     # add authorization to our headers dictionary
     headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 
-    return requests.get("https://oauth.reddit.com/r/askcarsales/hot", headers=headers)
+    return requests.get(f"https://oauth.reddit.com/r/{subreddit}/hot", headers=headers)
 
 def parse_text(data):
     text_votes = {}
@@ -32,3 +39,8 @@ def parse_text(data):
 
     od_text_votes = collections.OrderedDict(sorted(text_votes.items(), reverse=True))
     return list(od_text_votes.items())[0][1]
+
+
+if __name__ == '__main__':
+    data = call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD)
+    print(parse_text(data))

@@ -23,7 +23,10 @@ def call_api(CLIENT_ID, SECRET_KEY, USERNAME, PASSWORD, subreddit='askcarsales')
     # add authorization to our headers dictionary
     headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 
-    return requests.get(f"https://oauth.reddit.com/r/{subreddit}/hot", headers=headers)
+    return requests.get(
+                        f"https://oauth.reddit.com/r/{subreddit}/top",
+                        headers=headers, t=day
+                        )
 
 def parse_text(data):
     text_votes = {}

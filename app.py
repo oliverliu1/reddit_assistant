@@ -12,8 +12,7 @@ subreddits = [
               'cscareerquestions',
               'askcarsales',
               'askbattlestations',
-              'talesfromtechsupport',
-              'bestoflegaladvice'
+              'talesfromtechsupport'
               ]
 
 
